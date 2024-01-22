@@ -1,12 +1,17 @@
+import os
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import calendar
 
 
+DIR = "~/.config/dogg"
+
+
 def daily_cals():
     df = pd.read_csv(
-        "~/.config/dogg/data/food.csv",
+        os.path.join(DIR, "data/food.csv"),
         header=None,
         names=["Timestamp", "Column1", "Column2", "Meal", "Boolean", "Kcal"],
     )
@@ -57,7 +62,7 @@ def plot():
     plt.title("Daily calories")
     plt.tight_layout()
     plt.grid()
-    plt.show()
+    plt.savefig("food-plot.svg")
 
 
 def main():
