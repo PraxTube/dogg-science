@@ -1,4 +1,5 @@
 import os
+import sys
 
 import numpy as np
 import pandas as pd
@@ -6,12 +7,9 @@ import matplotlib.pyplot as plt
 import calendar
 
 
-DIR = "~/.config/dogg"
-
-
 def daily_cals():
     df = pd.read_csv(
-        os.path.join(DIR, "data/food.csv"),
+        os.path.join(sys.argv[1], "data/food.csv"),
         header=None,
         names=["Timestamp", "Column1", "Column2", "Meal", "Boolean", "Kcal"],
     )
