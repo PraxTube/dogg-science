@@ -42,7 +42,7 @@ def plot():
     plt.bar(daily_calories.index, daily_calories, color="skyblue", width=0.8)
 
     # Plot the moving average as a line
-    plt.plot(moving_average.index, moving_average, color='red', label='Moving Average')
+    plt.plot(moving_average.index, moving_average, color='red', label='Moving Average', linewidth=3)
 
     # Get month names to display on x-axis ticks
     month_names = [calendar.month_name[date.month] for date in first_day_of_month]
@@ -54,7 +54,7 @@ def plot():
     plt.ylim(y_min - 100, y_max + 100)
 
     plt.ylabel("Total Calories in kcal")
-    plt.title("Total Calories Consumed (Daily) with Single Tick for Each Month")
+    plt.title("Daily calories")
     plt.tight_layout()
     plt.grid()
     plt.show()
