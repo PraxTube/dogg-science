@@ -1,9 +1,16 @@
 import sys
 
+import matplotlib
+
 import calories
 import eat_counts
 import magnesium
 import creatine
+
+
+font = {"family": "monospace", "weight": "normal", "size": 18}
+
+matplotlib.rc("font", **font)
 
 
 def main():
