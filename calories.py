@@ -5,6 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import calendar
 
+from const import START_DATE
 from utils import moving_average
 
 
@@ -19,13 +20,9 @@ def daily_cals(dir_path):
     df["Timestamp"] = pd.to_datetime(df["Timestamp"], utc=True)
     # Extract date from timestamp and create a new 'Date' column
     df["Date"] = df["Timestamp"].dt.tz_convert(None).dt.date
-    # Group by 'Date' and calculate total calories for each day
-    raw_daily_calories = df.groupby("Date")["Kcal"].sum()
+    df = df[df["Date"] >= pd.to_datetime(START_DATE).date()]
 
-    # Find the index where the calories are non-zero
-    start_index = raw_daily_calories[raw_daily_calories != 0].index[0]
-    # Filter the dataset to start from the first non-zero calories
-    daily_calories = raw_daily_calories[start_index:]
+    daily_calories = df.groupby("Date")["Kcal"].sum()
     return daily_calories
 
 

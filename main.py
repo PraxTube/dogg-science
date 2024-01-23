@@ -3,6 +3,7 @@ import sys
 import calories
 import eat_counts
 import magnesium
+import creatine
 
 
 def main():
@@ -13,6 +14,8 @@ def main():
     eat_counts.plot(dir_path)
     print("Plotting magnesium")
     magnesium.plot(dir_path)
+    print("Plotting creatine")
+    creatine.plot(dir_path)
 
 
 if __name__ == "__main__":

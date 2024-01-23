@@ -4,10 +4,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import calendar
 
+from const import START_DATE
 from utils import moving_average
-
-
-START_DATE = "2023-11-01"
 
 
 def magnesium_pills(dir_path):
@@ -21,8 +19,8 @@ def magnesium_pills(dir_path):
     df["Timestamp"] = pd.to_datetime(df["Timestamp"], utc=True)
     # Extract date from timestamp and create a new 'Date' column
     df["Date"] = df["Timestamp"].dt.tz_convert(None).dt.date
-    # Group by 'Date' and calculate total calories for each day
     df = df[df["Date"] >= pd.to_datetime(START_DATE).date()]
+
     pills = df.groupby("Date")["Pills"].sum()
     return pills
 
