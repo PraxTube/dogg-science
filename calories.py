@@ -40,7 +40,7 @@ def plot(dir_path):
     plt.bar(daily_calories.index, daily_calories, color="skyblue", width=0.8)
 
     # Plot the moving average as a line
-    plt.plot(average.index, average, color='red', label='Moving Average', linewidth=3)
+    plt.plot(average.index, average, color="red", label="Moving Average", linewidth=3)
 
     # Get month names to display on x-axis ticks
     month_names = [calendar.month_name[date.month] for date in first_day_of_month]
