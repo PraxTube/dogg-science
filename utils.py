@@ -2,6 +2,7 @@ import pandas as pd
 
 
 def moving_average(data):
+    print(data)
     complete_date_range = pd.date_range(start=data.index.min(), end=data.index.max())
     data = data.reindex(complete_date_range, fill_value=0)
 

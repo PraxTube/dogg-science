@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 import calendar
 
 from const import START_DATE
-from utils import moving_average
 
 
 def convert_to_seconds(time_str):
@@ -59,11 +58,26 @@ def daily_sleep(dir_path):
     return df
 
 
+def moving_average(data):
+    cumulative_sum = data.cumsum()
+    moving_average = cumulative_sum / range(1, len(cumulative_sum) + 1)
+    return moving_average
+
+
 def plot(dir_path):
     df = daily_sleep(dir_path)
-    # average = moving_average(daily_amount)
+
+    start_sleep = np.array(df["Start"])
+    mask = start_sleep > 12
+    start_sleep = np.where(mask, -24 + start_sleep, start_sleep)
+    average_start = moving_average(start_sleep)
+
+    end_sleep = np.array(df["End"])
+    average_end = moving_average(end_sleep)
 
     fig, ax = plt.subplots()
+    plt.plot(df["Date"], average_start, color="red", label="Bedtime m-average", linewidth=3)
+    plt.plot(df["Date"], average_end, color="blue", label="Wake up m-average", linewidth=3)
 
     unique_months = set(date.strftime("%Y-%m-01") for date in df["Date"])
     first_day_of_month = pd.to_datetime(list(unique_months))
@@ -99,6 +113,7 @@ def plot(dir_path):
     ax.set_yticklabels(y_tick_labels(y_ticks))
     plt.ylim(bottom_min, top_max)
 
+    plt.legend()
     plt.ylabel("Hour of day")
     plt.title("Daily sleep")
     plt.tight_layout()
