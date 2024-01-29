@@ -1,6 +1,5 @@
 import os
 
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import calendar
@@ -39,8 +38,8 @@ def plot(dir_path):
     month_names = [calendar.month_name[date.month] for date in first_day_of_month]
     plt.xticks(first_day_of_month, month_names)
 
-    plt.ylabel("Daily creatine intake")
-    plt.title("Rough estimated amount in g")
+    plt.ylabel("Rough estimated amount in g")
+    plt.title("Daily creatine intake")
     plt.tight_layout()
     plt.grid()
     plt.savefig("creatine-plot.svg")

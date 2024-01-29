@@ -42,9 +42,9 @@ def plot(dir_path):
     month_names = [calendar.month_name[date.month] for date in first_day_of_month]
     plt.xticks(first_day_of_month, month_names)
 
-    plt.ylabel("Number of 120mg Magnesiumglycinat pills")
+    plt.ylabel("Number of pills")
     plt.title(
-        "Daily magnesium pill intake\nNOTE, some pills (around January) are actually\n150mg Magnesiumcitrat, I didn't notice that"
+        "Daily magnesium pill intake\nNOTE, some pills (around January) are actually\n150mg Magnesiumcitrat, and not 120mg Magnesiumglycinat\nI didn't notice that"
     )
     plt.tight_layout()
     plt.grid()

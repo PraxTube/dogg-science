@@ -9,7 +9,6 @@ import creatine
 
 
 font = {"family": "monospace", "weight": "normal", "size": 18}
-
 matplotlib.rc("font", **font)
 
 
