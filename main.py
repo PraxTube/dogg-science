@@ -6,6 +6,7 @@ import calories
 import eat_counts
 import magnesium
 import creatine
+import sleep
 
 
 font = {"family": "monospace", "weight": "normal", "size": 18}
@@ -22,6 +23,8 @@ def main():
     magnesium.plot(dir_path)
     print("Plotting creatine")
     creatine.plot(dir_path)
+    print("Plotting sleep")
+    sleep.plot(dir_path)
 
 
 if __name__ == "__main__":
