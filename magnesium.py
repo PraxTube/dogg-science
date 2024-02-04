@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import calendar
 
-from const import START_DATE
+from const import START_DATE, MAIN_COLOR
 from utils import moving_average
 
 
@@ -33,7 +33,7 @@ def plot(dir_path):
 
     # Plotting
     plt.figure(figsize=(14, 6))
-    plt.bar(pills.index, pills, color="skyblue", width=0.8)
+    plt.bar(pills.index, pills, color=MAIN_COLOR, width=0.8)
 
     # Plot the moving average as a line
     plt.plot(average.index, average, color="red", label="Moving Average", linewidth=3)

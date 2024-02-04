@@ -6,11 +6,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import calendar
 
-from const import START_DATE
+from const import START_DATE, MAIN_COLOR
+from utils import format_time
 
 
 def convert_to_seconds(time_str):
-    hours, minutes = map(int, time_str.split(":"))
+    hours, minutes = map(float, time_str.split(":"))
     return timedelta(hours=hours, minutes=minutes).seconds / 3600
 
 
@@ -18,9 +19,9 @@ def y_tick_labels(ticks):
     labels = []
     for tick in ticks:
         if tick >= 0:
-            labels.append("{:02d}:00".format(int(tick)))
+            labels.append("{:02d}:00".format(int(round(tick))))
         else:
-            labels.append("{:02d}:00".format(24 + int(tick)))
+            labels.append("{:02d}:00".format(24 + int(round(tick))))
     return labels
 
 
@@ -73,11 +74,26 @@ def plot(dir_path):
     average_start = moving_average(start_sleep)
 
     end_sleep = np.array(df["End"])
+    print(end_sleep)
     average_end = moving_average(end_sleep)
 
-    fig, ax = plt.subplots()
-    plt.plot(df["Date"], average_start, color="red", label="Bedtime m-average", linewidth=3)
-    plt.plot(df["Date"], average_end, color="blue", label="Wake up m-average", linewidth=3)
+    fig, ax = plt.subplots(figsize=(14, 6))
+    label = "Wake up average: {}".format(format_time(average_end[-1]))
+    plt.plot(
+        df["Date"],
+        average_end,
+        color="blue",
+        label=label,
+        linewidth=3,
+    )
+    label = f"Wake up average: {format_time(average_start[-1])}"
+    plt.plot(
+        df["Date"],
+        average_start,
+        color="red",
+        label=label,
+        linewidth=3,
+    )
 
     unique_months = set(date.strftime("%Y-%m-01") for date in df["Date"])
     first_day_of_month = pd.to_datetime(list(unique_months))
@@ -105,7 +121,7 @@ def plot(dir_path):
             bottom=bottom,
             width=0.8,
             align="center",
-            color="orange",
+            color=MAIN_COLOR,
         )
 
     y_ticks = np.arange(bottom_min, top_max, step=1)
